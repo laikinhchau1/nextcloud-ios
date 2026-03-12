@@ -10,7 +10,7 @@
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>vi</string>
 	<key>CFBundleDisplayName</key>
 	<string>HPA Cloud</string>
 	<key>CFBundleExecutable</key>

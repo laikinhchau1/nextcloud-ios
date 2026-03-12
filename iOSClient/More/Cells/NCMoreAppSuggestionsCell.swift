@@ -49,13 +49,12 @@ class NCMoreAppSuggestionsCell: BaseNCMoreCell {
     }
 
     override func setupCell(account: String, controller: NCMainTabBarController?) {
-        /*
-        guard let capabilities = NCNetworking.shared.capabilities[account] else {
-            return
-        }
-        */
-
         self.controller = controller
+
+        // Hide all app suggestion views
+        talkView.isHidden = true
+        notesView.isHidden = true
+        moreAppsView.isHidden = true
     }
 
     @objc func talkTapped(_ sender: Any?) {

@@ -48,7 +48,6 @@ class NCMore: UIViewController, UITableViewDelegate, UITableViewDataSource {
         var type: SectionType
 
         enum SectionType {
-            case moreApps
             case regular
         }
     }
@@ -79,7 +78,6 @@ class NCMore: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemGroupedBackground
-        tableView.register(NCMoreAppSuggestionsCell.fromNib(), forCellReuseIdentifier: NCMoreAppSuggestionsCell.reuseIdentifier)
 
         // create tap gesture recognizer
         let tapQuota = UITapGestureRecognizer(target: self, action: #selector(tapLabelQuotaExternalSite(_:)))
@@ -249,10 +247,6 @@ class NCMore: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     private func loadSections() {
-        if !NCBrandOptions.shared.disable_show_more_nextcloud_apps_in_settings {
-            sections.append(Section(items: [NKExternalSite()], type: .moreApps))
-        }
-
         if !functionMenu.isEmpty {
             sections.append(Section(items: functionMenu, type: .regular))
         }
@@ -292,13 +286,7 @@ class NCMore: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
-        let section = sections[index]
-
-        if section.type == .moreApps || (index > 0 && sections[index - 1].type == .moreApps) {
-            return 1
-        } else {
-            return 20
-        }
+        return 20
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
@@ -306,48 +294,40 @@ class NCMore: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = sections[indexPath.section]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CCCellMore.reuseIdentifier, for: indexPath) as? CCCellMore else { return UITableViewCell() }
 
-        if section.type == .moreApps {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NCMoreAppSuggestionsCell.reuseIdentifier, for: indexPath) as? NCMoreAppSuggestionsCell else { return UITableViewCell() }
-            cell.setupCell(account: session.account, controller: controller)
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CCCellMore.reuseIdentifier, for: indexPath) as? CCCellMore else { return UITableViewCell() }
+        cell.setupCell(account: session.account, controller: controller)
 
-            cell.setupCell(account: session.account, controller: controller)
+        let item = sections[indexPath.section].items[indexPath.row]
 
-            let item = sections[indexPath.section].items[indexPath.row]
+        cell.imageIcon?.image = utility.loadImage(named: item.icon, colors: [NCBrandColor.shared.iconImageColor])
+        cell.imageIcon?.contentMode = .scaleAspectFit
+        cell.labelText?.text = NSLocalizedString(item.name, comment: "")
+        cell.labelText.textColor = NCBrandColor.shared.textColor
 
-            cell.imageIcon?.image = utility.loadImage(named: item.icon, colors: [NCBrandColor.shared.iconImageColor])
-            cell.imageIcon?.contentMode = .scaleAspectFit
-            cell.labelText?.text = NSLocalizedString(item.name, comment: "")
-            cell.labelText.textColor = NCBrandColor.shared.textColor
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.separator.backgroundColor = .separator
+        cell.separatorHeigth.constant = 0.4
 
-            cell.separator.backgroundColor = .separator
-            cell.separatorHeigth.constant = 0.4
+        cell.removeCornerRadius()
+        let rows = tableView.numberOfRows(inSection: indexPath.section)
 
-            cell.removeCornerRadius()
-            let rows = tableView.numberOfRows(inSection: indexPath.section)
-
-            if indexPath.row == 0 {
-                cell.applyCornerRadius()
-                if indexPath.row == rows - 1 {
-                    cell.separator.backgroundColor = .clear
-                    cell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-                } else {
-                    cell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-                }
-            } else if indexPath.row == rows - 1 {
-                cell.applyCornerRadius()
-                cell.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        if indexPath.row == 0 {
+            cell.applyCornerRadius()
+            if indexPath.row == rows - 1 {
                 cell.separator.backgroundColor = .clear
+                cell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            } else {
+                cell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
             }
-
-            return cell
+        } else if indexPath.row == rows - 1 {
+            cell.applyCornerRadius()
+            cell.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            cell.separator.backgroundColor = .clear
         }
+
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

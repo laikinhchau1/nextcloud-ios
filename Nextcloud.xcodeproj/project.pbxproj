@@ -1188,6 +1188,10 @@
 		AA9B6A8E2DF1D8F7009D805D /* et */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = et; path = et.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA9B6A8F2DF1D8F7009D805D /* et */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = et; path = "Supporting Files/et.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		AA9B6A902DF1D8F7009D805D /* et */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = et; path = et.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		VI0000001D477A4B00E6AF45 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		VI0000002D660EFE00F8D37C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = vi; path = "Supporting Files/vi.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		VI00000027C78E490019EF5E /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		VI000000290ABB25002EB562 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Intent.strings; sourceTree = "<group>"; };
 		AAA7BC2D2D3E39EC008F1A22 /* CapabilitiesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapabilitiesResponse.swift; sourceTree = "<group>"; };
 		AAA7BC2F2D3E3B83008F1A22 /* CapabilityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapabilityResponse.swift; sourceTree = "<group>"; };
 		AABD0C862D5F58C400F009E6 /* Server.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Server.sh; sourceTree = "<group>"; };
@@ -3757,9 +3761,10 @@
 			};
 			buildConfigurationList = F7F67BA31A24D27800EE80DA /* Build configuration list for PBXProject "Nextcloud" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			developmentRegion = vi;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				vi,
 				en,
 				Base,
 				de,
@@ -4943,6 +4948,7 @@
 				AA517BB12D660F8A00F8D37C /* sv */,
 				AA517BB22D660F8B00F8D37C /* tr */,
 				AA9B6A8F2DF1D8F7009D805D /* et */,
+				VI0000002D660EFE00F8D37C /* vi */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -4999,6 +5005,7 @@
 				AACCAB642CFE04F700DA1786 /* lo */,
 				AA52EB2E2D4297570089C348 /* el */,
 				AA9B6A902DF1D8F7009D805D /* et */,
+				VI00000027C78E490019EF5E /* vi */,
 			);
 			name = InfoPlist.strings;
 			path = "Supporting Files";
@@ -5057,6 +5064,7 @@
 				AACCAB622CFE04F700DA1786 /* lo */,
 				AA52EB2C2D4297570089C348 /* el */,
 				AA9B6A8D2DF1D8F7009D805D /* et */,
+				VI000000290ABB25002EB562 /* vi */,
 			);
 			name = Intent.intentdefinition;
 			sourceTree = "<group>";
@@ -5113,6 +5121,7 @@
 				AACCAB632CFE04F700DA1786 /* lo */,
 				AA52EB2D2D4297570089C348 /* el */,
 				AA9B6A8E2DF1D8F7009D805D /* et */,
+				VI0000001D477A4B00E6AF45 /* vi */,
 			);
 			name = Localizable.strings;
 			path = "Supporting Files";
